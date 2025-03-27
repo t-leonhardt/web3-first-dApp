@@ -73,4 +73,20 @@
 	}
 ];
 
+const MoodContractInstance = getContract({
+            address: MoodContractAddress,
+            abi: MoodContractABI,
+            client: walletClient,
+});
+
+getMood= async function() {
+    const mood = await MoodContractInstance.read.getMood();
+    document.getElementById("showMood").innerText = `Your Mood: ${mood}`;
+}
+
+setMood= async function() {
+    const mood = document.getElementById("mood").value;
+    await MoodContractInstance.write.setMood([mood],{account:address});
+}
+
 </script>
